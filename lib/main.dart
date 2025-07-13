@@ -16,7 +16,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => ProductBloc())],
+      providers: [
+        BlocProvider<ProductBloc>(create: (_) => serviceLocator<ProductBloc>()),
+      ],
       child: MaterialApp(home: ProductScreen()),
     );
   }

@@ -7,6 +7,7 @@ import 'package:product_with_clean_arc/features/products/data/data_source/produc
 import 'package:product_with_clean_arc/features/products/data/repositories/product_repositoy_impl.dart';
 import 'package:product_with_clean_arc/features/products/domain/repositories/products_repository.dart';
 import 'package:product_with_clean_arc/features/products/domain/usecases/fetch_products_usecase.dart';
+import 'package:product_with_clean_arc/features/products/presentation/bloc/product_bloc.dart';
 
 final GetIt serviceLocator = GetIt.instance;
 
@@ -23,5 +24,10 @@ void setupServiceLocator() {
     ProductRepositoyImpl(productRemoteDataSrc: serviceLocator()),
   );
 
-  serviceLocator.registerSingleton(FetchProductsUsecase(productsRepository: serviceLocator()));
+  serviceLocator.registerSingleton(
+    FetchProductsUsecase(productsRepository: serviceLocator()),
+  );
+
+  serviceLocator.registerFactory<ProductBloc>(() => ProductBloc());
+  // serviceLocator.registerSingleton<ProductBloc>(ProductBloc());
 }

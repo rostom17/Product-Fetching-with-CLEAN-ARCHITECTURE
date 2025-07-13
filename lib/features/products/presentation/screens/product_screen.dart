@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:product_with_clean_arc/config/service_locator.dart';
 import 'package:product_with_clean_arc/features/products/presentation/bloc/product_bloc.dart';
 import 'package:product_with_clean_arc/features/products/presentation/bloc/product_events.dart';
 
@@ -8,12 +9,12 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productBloc = BlocProvider.of<ProductBloc>(context);
+    //final productBloc = BlocProvider.of<ProductBloc>(context);
     return Scaffold(
       body: _buildBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          productBloc.getAllProduct();
+          context.read<ProductBloc>().getAllProduct();
         },
         child: Icon(Icons.check),
       ),
