@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 
-class RequsetModel {
+class NetworkRequsetModel {
   final String path;
   final Map<String, dynamic>? queryParams;
   final Map<String, String>? headers;
   final FormData? formData;
 
-  RequsetModel({
+  NetworkRequsetModel({
     required this.path,
     this.queryParams,
     this.headers,

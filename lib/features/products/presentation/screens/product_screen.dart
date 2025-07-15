@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:product_with_clean_arc/config/service_locator.dart';
+import 'package:product_with_clean_arc/inection_container.dart';
 import 'package:product_with_clean_arc/features/products/presentation/bloc/product_bloc.dart';
 import 'package:product_with_clean_arc/features/products/presentation/bloc/product_events.dart';
 
@@ -29,7 +29,7 @@ class ProductScreen extends StatelessWidget {
         } else if (state is ProductStateFetchingLoading) {
           return Center(child: LinearProgressIndicator());
         } else if (state is ProductStateFetchingFailed) {
-          return Center(child: Text("Faild.! : ${state.apiErrorMessage}"));
+          return Center(child: Text("${state.apiErrorMessage.errorMessage}"));
         } else if (state is ProductStateFetchingSuccessful) {
           return ListView.builder(
             itemCount: state.productsList.length,

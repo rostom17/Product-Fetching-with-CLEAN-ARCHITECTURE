@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:product_with_clean_arc/config/service_locator.dart';
+import 'package:product_with_clean_arc/inection_container.dart';
 import 'package:product_with_clean_arc/features/common/domain/entities/no_params.dart';
 import 'package:product_with_clean_arc/features/products/domain/usecases/fetch_products_usecase.dart';
 import 'package:product_with_clean_arc/features/products/presentation/bloc/product_events.dart';

@@ -1,7 +1,8 @@
 import 'package:get_it/get_it.dart';
-import 'package:product_with_clean_arc/core/network_executor/error_mapper/default_error_mapper.dart';
-import 'package:product_with_clean_arc/core/network_executor/network_executor.dart';
-import 'package:product_with_clean_arc/core/network_executor/set_up_dio.dart';
+import 'package:product_with_clean_arc/core/network/connectivity/connectivity_checker.dart';
+import 'package:product_with_clean_arc/core/network/errors/default_error_mapper.dart';
+import 'package:product_with_clean_arc/core/network/network_executor.dart';
+import 'package:product_with_clean_arc/core/network/set_up_dio.dart';
 import 'package:product_with_clean_arc/features/products/data/data_source/product_remote_data_src.dart';
 import 'package:product_with_clean_arc/features/products/data/data_source/product_remote_data_src_impl.dart';
 import 'package:product_with_clean_arc/features/products/data/repositories/product_repositoy_impl.dart';
@@ -13,7 +14,11 @@ final GetIt serviceLocator = GetIt.instance;
 
 void setupServiceLocator() {
   serviceLocator.registerSingleton(
-    NetworkExecutor(DefaultErrorMapper(), dio: getDioInstance()),
+    NetworkExecutor(
+      errorMapper: DefaultErrorMapper(),
+      dio: getDioInstance(),
+      connectivityChecker: ConnectivityChecker(),
+    ),
   );
 
   serviceLocator.registerSingleton<ProductRemoteDataSrc>(

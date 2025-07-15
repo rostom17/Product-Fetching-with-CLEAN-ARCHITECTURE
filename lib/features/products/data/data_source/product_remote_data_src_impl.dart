@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:product_with_clean_arc/core/network_executor/models/requset_model.dart';
-import 'package:product_with_clean_arc/core/network_executor/network_executor.dart';
+import 'package:product_with_clean_arc/core/network/models/network_requset_model.dart';
+import 'package:product_with_clean_arc/core/network/network_executor.dart';
 import 'package:product_with_clean_arc/features/common/domain/entities/api_error.dart';
 import 'package:product_with_clean_arc/features/products/data/data_source/product_remote_data_src.dart';
 import 'package:product_with_clean_arc/features/products/data/models/product_model.dart';
@@ -13,7 +13,7 @@ class ProductRemoteDataSrcImpl implements ProductRemoteDataSrc {
   @override
   Future<Either<ApiErrorCommonEntity, List<ProductModel>>> getProducts() async {
     final response = await networkExecutor.getRequest(
-      RequsetModel(path: "/products"),
+      NetworkRequsetModel(path: "/products"),
     );
     if (response.statusCode == 200 || response.statusCode == 201) {
       List<ProductModel> productsList = [];
@@ -24,11 +24,7 @@ class ProductRemoteDataSrcImpl implements ProductRemoteDataSrc {
 
       return Right(productsList);
     } else {
-      return Left(
-        ApiErrorCommonEntity(
-          errorMessage: "Failed To Fetch Product Data.! Try Again?",
-        ),
-      );
+      return Left(ApiErrorCommonEntity(errorMessage: response.message));
     }
   }
 }

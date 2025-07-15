@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
-import 'package:product_with_clean_arc/config/network_config.dart';
-import '../network_executor/interceptor/logger_interceptor.dart';
+
+import './interceptor/logger_interceptor.dart';
+import './config/network_config.dart';
 
 Dio getDioInstance() {
   BaseOptions dioOption = BaseOptions(
@@ -17,7 +18,7 @@ Dio getDioInstance() {
     RetryInterceptor(
       dio: dio,
       retries: 2,
-      retryDelays: [const Duration(seconds: 5), const Duration(seconds: 11)],
+      retryDelays: NetworkConfig.retryDelays,
     ),
     //Refresh Interceptor
   ];
