@@ -5,6 +5,10 @@ class ConnectivityChecker {
     final List<ConnectivityResult> connectivityResult = await (Connectivity()
         .checkConnectivity());
 
+    if (connectivityResult.contains(ConnectivityResult.none)) {
+      return false;
+    }
+
     if (connectivityResult.contains(ConnectivityResult.mobile)) {
       return true;
     }
@@ -16,6 +20,16 @@ class ConnectivityChecker {
     if (connectivityResult.contains(ConnectivityResult.ethernet)) {
       return true;
     }
+
+    if (connectivityResult.contains(ConnectivityResult.bluetooth)) {
+      return true;
+    }
+
+    if (connectivityResult.contains(ConnectivityResult.vpn) ||
+        connectivityResult.contains(ConnectivityResult.other)) {
+      true;
+    }
+
     return false;
   }
 }

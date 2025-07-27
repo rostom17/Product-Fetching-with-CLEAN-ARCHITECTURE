@@ -15,12 +15,14 @@ Dio getDioInstance() {
 
   List<Interceptor> interceptors = [
     LoggerInterceptor(),
+  
     RetryInterceptor(
       dio: dio,
-      retries: 2,
+      retries: NetworkConfig.maxRetries,
       retryDelays: NetworkConfig.retryDelays,
     ),
     //Refresh Interceptor
+    //Auth Interceptor
   ];
 
   dio.interceptors.addAll(interceptors);
